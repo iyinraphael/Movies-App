@@ -9,9 +9,12 @@
 import Foundation
 
 class MovieController {
-    
+    private let moc = CoreDataStack.shared.mainContext
     private let apiKey = "4cc920dab8b729a619647ccc4d191d5e"
     private let baseURL = URL(string: "https://api.themoviedb.org/3/search/movie")!
+    private let firebaseURL = URL(string: "https://iossprint4project.firebaseio.com/")!
+    
+    typealias CompletionHandler = (Error?) -> Void
     
     func searchForMovie(with searchTerm: String, completion: @escaping (Error?) -> Void) {
         
@@ -52,7 +55,43 @@ class MovieController {
         }.resume()
     }
     
+    
+    func put(movie: Movie, completion: @escaping CompletionHandler = {_ in}){
+        let url = firebaseURL.appendingPathComponent(movie.identifier!.uuidString)
+                            .appendingPathExtension("json")
+        var requestUrl = URLRequest(url: url)
+        requestUrl.httpMethod = "PUt"
+        do{
+            let jsonEncoder = JSONEncoder()
+            requestUrl.httpBody = try jsonEncoder.encode(movie)
+        }catch{
+            NSLog("Error encoding movie data to JSON: \(error)")
+            completion(nil)
+        }
+        
+        URLSession.shared.dataTask(with: requestUrl) { (_, _, error) in
+            if let error = error {
+                NSLog("Error Sending movie to Firebase\(error)")
+            }
+            completion(nil)
+        }.resume()
+        
+        
+    }
+    
     // MARK: - Properties
     
     var searchedMovies: [MovieRepresentation] = []
+}
+
+extension MovieController {
+    
+    func saveToPersistence(){
+        do{
+            try moc.save()
+        }catch{
+            NSLog("Error Saving Data to Manage object context: \(error)")
+        }
+    }
+    
 }
