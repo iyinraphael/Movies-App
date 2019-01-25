@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		EBAF273E21F799330055AF47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAF273D21F799330055AF47 /* AppDelegate.swift */; };
 		EBAF274021F799330055AF47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAF273F21F799330055AF47 /* ViewController.swift */; };
-		EBAF274321F799330055AF47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAF274121F799330055AF47 /* Main.storyboard */; };
 		EBAF274521F799360055AF47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBAF274421F799360055AF47 /* Assets.xcassets */; };
-		EBAF274821F799360055AF47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBAF274621F799360055AF47 /* LaunchScreen.storyboard */; };
 		EBAF275321F799360055AF47 /* Movies_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAF275221F799360055AF47 /* Movies_AppTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,9 +27,7 @@
 		EBAF273A21F799330055AF47 /* Movies App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movies App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAF273D21F799330055AF47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBAF273F21F799330055AF47 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		EBAF274221F799330055AF47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EBAF274421F799360055AF47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		EBAF274721F799360055AF47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBAF274921F799360055AF47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBAF274E21F799360055AF47 /* Movies AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Movies AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBAF275221F799360055AF47 /* Movies_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies_AppTests.swift; sourceTree = "<group>"; };
@@ -79,9 +75,7 @@
 			children = (
 				EBAF273D21F799330055AF47 /* AppDelegate.swift */,
 				EBAF273F21F799330055AF47 /* ViewController.swift */,
-				EBAF274121F799330055AF47 /* Main.storyboard */,
 				EBAF274421F799360055AF47 /* Assets.xcassets */,
-				EBAF274621F799360055AF47 /* LaunchScreen.storyboard */,
 				EBAF274921F799360055AF47 /* Info.plist */,
 			);
 			path = "Movies App";
@@ -177,9 +171,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBAF274821F799360055AF47 /* LaunchScreen.storyboard in Resources */,
 				EBAF274521F799360055AF47 /* Assets.xcassets in Resources */,
-				EBAF274321F799330055AF47 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,25 +211,6 @@
 			targetProxy = EBAF274F21F799360055AF47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		EBAF274121F799330055AF47 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EBAF274221F799330055AF47 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		EBAF274621F799360055AF47 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EBAF274721F799360055AF47 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EBAF275521F799370055AF47 /* Debug */ = {
