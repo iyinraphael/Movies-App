@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class MovieController {
     private let moc = CoreDataStack.shared.mainContext
@@ -56,6 +57,7 @@ class MovieController {
     }
     
     
+    
     func put(movie: Movie, completion: @escaping CompletionHandler = {_ in}){
         let url = firebaseURL.appendingPathComponent(movie.identifier!.uuidString)
                             .appendingPathExtension("json")
@@ -79,7 +81,48 @@ class MovieController {
         
     }
     
-    // MARK: - Properties
+    func fetchSingleMovie(identifier: UUID) -> Movie?{
+        let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "identifier == %@", identifier as NSUUID)
+        return (try? moc.fetch(fetchRequest))?.first
+    }
+    
+    
+    func fetchAllMovies(completion: @escaping CompletionHandler = {_ in}){
+        let url = firebaseURL.appendingPathExtension("json")
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            guard let data = data else {
+                NSLog("Data not found on database")
+                completion(NSError())
+                return
+            }
+            
+            if let error = error {
+                NSLog("Error fetching data task: \(error)")
+                completion(error)
+                return
+            }
+            
+            do{
+                let jsonDecoder = JSONDecoder()
+                let movieRepresentation = try jsonDecoder.decode([String : MovieRepresentation].self, from: data).values.map({$0})
+                for movieRep in movieRepresentation{
+                    if let movie = self.fetchSingleMovie(identifier: movieRep.identifier!){
+                        self.update(movieRepresentation: movieRep, movie: movie)
+                    }else{
+                        let _ = Movie(movieRepresentation: movieRep)
+                    }
+                }
+                self.saveToPersistence()
+                completion(nil)
+            }catch{
+                NSLog("Error occured trying to retrieve data from dataBase \(error)")
+                completion(error)
+                return
+            }
+        }.resume()
+    }
+
     
     var searchedMovies: [MovieRepresentation] = []
 }
@@ -92,6 +135,12 @@ extension MovieController {
         }catch{
             NSLog("Error Saving Data to Manage object context: \(error)")
         }
+    }
+    
+    func update(movieRepresentation: MovieRepresentation, movie: Movie){
+        movie.title = movieRepresentation.title
+        movie.identifier = movieRepresentation.identifier
+        movie.hasWatched = movieRepresentation.hasWatched!
     }
     
 }
